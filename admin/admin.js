@@ -1,5 +1,5 @@
 const client=window.supabaseClient;let allVehicles=[];
-const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);const money=n=>n?Number(n).toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}):'[A DEFINIR]';
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);const money=n=>n?Number(n).toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}):'Não informado';
 function status(msg,error=false,root=document){const el=root.querySelector('.status');if(el){el.textContent=msg;el.style.color=error?'#e66':'#24bd69'}}
 async function init(){if(!client){status('Supabase ainda não foi configurado.',true);return}const{data:{session}}=await client.auth.getSession();session?showApp(session.user):showAuth();client.auth.onAuthStateChange((_e,s)=>setTimeout(()=>s?showApp(s.user):showAuth(),0))}
 function showAuth(){$('#auth-view').classList.remove('hidden');$('#app-view').classList.add('hidden')}
