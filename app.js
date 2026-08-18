@@ -3,12 +3,12 @@ const store = { name: 'Loja do Preto', whatsapp: STORE_WHATSAPP_NUMBER };
 const whatsappIcon='<span class="wa-icon" aria-hidden="true"></span>';
 
 let vehicles = [
-  {id:'demo-001',brand:'Toyota',model:'Corolla',version:'XEi',year:2024,mileage:32000,transmission:'Automático',fuel:'Flex',color:'Preto',category:'Sedan',price:null,installment:null,featured:true,image:'assets/hero-showroom.png',whatsappNumber:'',whatsappMessage:'',features:[]},
-  {id:'demo-002',brand:'Jeep',model:'Compass',version:'Limited',year:2023,mileage:41000,transmission:'Automático',fuel:'Flex',color:'Grafite',category:'SUV',price:null,installment:null,featured:true,image:'assets/hero-showroom.png',whatsappNumber:'',whatsappMessage:'',features:[]},
-  {id:'demo-003',brand:'BMW',model:'320i',version:'Sport GP',year:2022,mileage:38000,transmission:'Automático',fuel:'Gasolina',color:'Preto',category:'Sedan',price:null,installment:null,featured:true,image:'assets/hero-showroom.png',whatsappNumber:'',whatsappMessage:'',features:[]},
-  {id:'demo-004',brand:'Volkswagen',model:'T-Cross',version:'Highline',year:2023,mileage:29000,transmission:'Automático',fuel:'Flex',color:'Prata',category:'SUV',price:null,installment:null,featured:false,image:'assets/hero-showroom.png',whatsappNumber:'',whatsappMessage:'',features:[]},
-  {id:'demo-005',brand:'Honda',model:'Civic',version:'Touring',year:2021,mileage:52000,transmission:'Automático',fuel:'Gasolina',color:'Branco',category:'Sedan',price:null,installment:null,featured:false,image:'assets/hero-showroom.png',whatsappNumber:'',whatsappMessage:'',features:[]},
-  {id:'demo-006',brand:'Chevrolet',model:'Tracker',version:'Premier',year:2024,mileage:18000,transmission:'Automático',fuel:'Flex',color:'Preto',category:'SUV',price:null,installment:null,featured:false,image:'assets/hero-showroom.png',whatsappNumber:'',whatsappMessage:'',features:[]}
+  {id:'demo-001',brand:'Toyota',model:'Corolla',version:'XEi',year:2024,mileage:32000,transmission:'Automático',fuel:'Flex',color:'Preto',category:'Sedan',price:null,installment:null,featured:true,image:'https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/hero-showroom.jpg',whatsappNumber:'',whatsappMessage:'',features:[]},
+  {id:'demo-002',brand:'Jeep',model:'Compass',version:'Limited',year:2023,mileage:41000,transmission:'Automático',fuel:'Flex',color:'Grafite',category:'SUV',price:null,installment:null,featured:true,image:'https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/hero-showroom.jpg',whatsappNumber:'',whatsappMessage:'',features:[]},
+  {id:'demo-003',brand:'BMW',model:'320i',version:'Sport GP',year:2022,mileage:38000,transmission:'Automático',fuel:'Gasolina',color:'Preto',category:'Sedan',price:null,installment:null,featured:true,image:'https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/hero-showroom.jpg',whatsappNumber:'',whatsappMessage:'',features:[]},
+  {id:'demo-004',brand:'Volkswagen',model:'T-Cross',version:'Highline',year:2023,mileage:29000,transmission:'Automático',fuel:'Flex',color:'Prata',category:'SUV',price:null,installment:null,featured:false,image:'https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/hero-showroom.jpg',whatsappNumber:'',whatsappMessage:'',features:[]},
+  {id:'demo-005',brand:'Honda',model:'Civic',version:'Touring',year:2021,mileage:52000,transmission:'Automático',fuel:'Gasolina',color:'Branco',category:'Sedan',price:null,installment:null,featured:false,image:'https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/hero-showroom.jpg',whatsappNumber:'',whatsappMessage:'',features:[]},
+  {id:'demo-006',brand:'Chevrolet',model:'Tracker',version:'Premier',year:2024,mileage:18000,transmission:'Automático',fuel:'Flex',color:'Preto',category:'SUV',price:null,installment:null,featured:false,image:'https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/hero-showroom.jpg',whatsappNumber:'',whatsappMessage:'',features:[]}
 ];
 
 const money = n => n ? Number(n).toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}) : 'Consulte o valor';
@@ -55,7 +55,7 @@ async function loadRemoteContent(){
     if(remoteVehicles?.length){
       vehicles=remoteVehicles.map(v=>({
         ...v,
-        image:v.image_url||'assets/hero-showroom.png',
+        image:v.image_url||'https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/hero-showroom.jpg',
         whatsappNumber:v.whatsapp_number||'',
         whatsappMessage:v.whatsapp_message||'',
         features:v.features||[]
@@ -76,4 +76,3 @@ if(window.supabaseClient){
     .on('postgres_changes',{event:'*',schema:'public',table:'store_settings'},loadRemoteContent)
     .subscribe();
 }
-
