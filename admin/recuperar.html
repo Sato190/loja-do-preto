@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Recuperar acesso | Loja do Preto</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/logo-optimized.jpg">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+  <main class="signup-page">
+    <section class="signup-card" id="request-card">
+      <a class="back-link" href="./">← Voltar para o login</a>
+      <img src="https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/logo-optimized.jpg" alt="Loja do Preto">
+      <p class="overline">Recuperar acesso</p>
+      <h1>Redefina<br>sua senha.</h1>
+      <p>Informe o e-mail cadastrado. Enviaremos um link seguro para você criar uma nova senha.</p>
+      <form id="recovery-form">
+        <label>E-mail<input required type="email" name="email" autocomplete="email" value="andrenevessato04@gmail.com"></label>
+        <button class="primary" type="submit">Enviar link de recuperação</button>
+        <p class="status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <section class="signup-card hidden" id="update-card">
+      <img src="https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/logo-optimized.jpg" alt="Loja do Preto">
+      <p class="overline">Nova senha</p>
+      <h1>Crie sua<br>nova senha.</h1>
+      <form id="update-form">
+        <label>Nova senha<div class="password-field"><input required id="new-password" type="password" name="password" minlength="8" autocomplete="new-password"><button class="password-toggle" type="button" data-toggle="new-password" aria-label="Mostrar senha" hidden>👁️</button></div></label>
+        <label>Confirme a senha<div class="password-field"><input required id="confirm-new-password" type="password" name="confirmPassword" minlength="8" autocomplete="new-password"><button class="password-toggle" type="button" data-toggle="confirm-new-password" aria-label="Mostrar senha" hidden>👁️</button></div></label>
+        <button class="primary" type="submit">Salvar nova senha</button>
+        <p class="status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.1"></script>
+  <script src="../supabase-config.js"></script>
+  <script src="recuperar.js"></script>
+</body>
+</html>
+
