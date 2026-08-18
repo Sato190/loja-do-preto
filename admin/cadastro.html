@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Criar acesso | Loja do Preto</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/logo-optimized.jpg">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+  <main class="signup-page">
+    <section class="signup-card" id="signup-card">
+      <a class="back-link" href="./">← Voltar para o login</a>
+      <img src="https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/logo-optimized.jpg" alt="Loja do Preto">
+      <p class="overline">Primeiro acesso</p>
+      <h1>Crie agora<br>o seu login.</h1>
+      <p>Cadastre seu e-mail e crie uma senha. Enviaremos uma mensagem para você confirmar o endereço.</p>
+      <form id="signup-form">
+        <label>E-mail<input required type="email" name="email" autocomplete="email" placeholder="seuemail@exemplo.com"></label>
+        <label>Senha<div class="password-field"><input required id="signup-password" type="password" name="password" minlength="8" autocomplete="new-password" placeholder="Mínimo de 8 caracteres"><button class="password-toggle" type="button" data-toggle="signup-password" aria-label="Mostrar senha" title="Mostrar senha" hidden>👁️</button></div></label>
+        <label>Confirme a senha<div class="password-field"><input required id="confirm-password" type="password" name="confirmPassword" minlength="8" autocomplete="new-password"><button class="password-toggle" type="button" data-toggle="confirm-password" aria-label="Mostrar senha" title="Mostrar senha" hidden>👁️</button></div></label>
+        <button class="primary" type="submit">Criar meu acesso</button>
+        <p class="status" role="status" aria-live="polite"></p>
+      </form>
+      <p class="login-hint">Já confirmou seu e-mail? <a href="./">Entrar no painel</a></p>
+    </section>
+    <section class="signup-card success hidden" id="success-card">
+      <div class="success-icon">✓</div>
+      <p class="overline">Cadastro realizado</p>
+      <h1>Confira<br>seu e-mail.</h1>
+      <p>Enviamos um link de confirmação para <strong id="sent-email"></strong>. Abra a mensagem e confirme o endereço para liberar seu acesso.</p>
+      <button class="primary" id="resend" type="button">Reenviar e-mail</button>
+      <p class="status" role="status" aria-live="polite"></p>
+      <a class="back-login" href="./">Voltar para o login</a>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.1"></script>
+  <script src="../supabase-config.js"></script>
+  <script src="cadastro.js"></script>
+</body>
+</html>
+
