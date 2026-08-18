@@ -1,7 +1,7 @@
 const client=window.supabaseClient;let allVehicles=[];
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);const money=n=>n?Number(n).toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}):'[A DEFINIR]';
 function status(msg,error=false,root=document){const el=root.querySelector('.status');if(el){el.textContent=msg;el.style.color=error?'#e66':'#24bd69'}}
-async function init(){if(!client){status('Supabase ainda não foi configurado.',true);return}const{data:{session}}=await client.auth.getSession();session?showApp(session.user):showAuth();client.auth.onAuthStateChange((_e,s)=>s?showApp(s.user):showAuth())}
+async function init(){if(!client){status('Supabase ainda não foi configurado.',true);return}const{data:{session}}=await client.auth.getSession();session?showApp(session.user):showAuth();client.auth.onAuthStateChange((_e,s)=>setTimeout(()=>s?showApp(s.user):showAuth(),0))}
 function showAuth(){$('#auth-view').classList.remove('hidden');$('#app-view').classList.add('hidden')}
 async function showApp(user){$('#auth-view').classList.add('hidden');$('#app-view').classList.remove('hidden');$('#user-email').textContent=user.email;await Promise.all([loadVehicles(),loadSettings()])}
 $('#login-form').addEventListener('submit',async e=>{e.preventDefault();status('Entrando…');const d=new FormData(e.target);const{error}=await client.auth.signInWithPassword({email:d.get('email'),password:d.get('password')});status(error?error.message:'Login realizado.',!!error)});
