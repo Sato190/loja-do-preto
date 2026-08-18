@@ -1,5 +1,6 @@
 const STORE_WHATSAPP_NUMBER = '';
 const store = { name: 'Loja do Preto', whatsapp: STORE_WHATSAPP_NUMBER };
+const whatsappIcon='<span class="wa-icon" aria-hidden="true"></span>';
 
 let vehicles = [
   {id:'demo-001',brand:'Toyota',model:'Corolla',version:'XEi',year:2024,mileage:32000,transmission:'Automático',fuel:'Flex',color:'Preto',category:'Sedan',price:null,installment:null,featured:true,image:'assets/hero-showroom.png',whatsappNumber:'',whatsappMessage:'',features:[]},
@@ -13,7 +14,7 @@ let vehicles = [
 const money = n => n ? n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}) : '[PREÇO A DEFINIR]';
 const messageFor = v => v.whatsappMessage || `Olá! Tenho interesse no ${v.brand} ${v.model} ${v.version} ${v.year} anunciado no site da Loja do Preto. Gostaria de receber mais informações e conhecer as condições de negociação.`;
 function waLink(message, number=store.whatsapp){ const clean=(number||'').replace(/\D/g,''); return clean ? `https://wa.me/${clean}?text=${encodeURIComponent(message)}` : `https://wa.me/?text=${encodeURIComponent(message+'\n\n[WhatsApp da loja ainda será configurado no site.]')}`; }
-function bindWhatsApp(root=document){ root.querySelectorAll('[data-wa]').forEach(a=>{a.href=waLink(a.dataset.message||'Olá! Gostaria de falar com a Loja do Preto.');a.target='_blank';a.rel='noopener';}); }
+function bindWhatsApp(root=document){ root.querySelectorAll('[data-wa]').forEach(a=>{a.href=waLink(a.dataset.message||'Olá! Gostaria de falar com a Loja do Preto.');a.target='_blank';a.rel='noopener';if(!a.querySelector('.wa-icon')){a.innerHTML=a.innerHTML.replace(/^\s*◉\s*/,'');a.insertAdjacentHTML('afterbegin',whatsappIcon)}}); }
 
 function card(v){return `<article class="vehicle-card"><div class="vehicle-photo"><img src="${v.image}" alt="Imagem demonstrativa de ${v.brand} ${v.model}" loading="lazy">${v.featured?'<span class="tag">DESTAQUE</span>':''}<span class="demo-tag">IMAGEM DEMONSTRATIVA</span></div><div class="vehicle-body"><h3>${v.brand} ${v.model}</h3><p class="version">${v.version}</p><a class="btn btn-wa card-wa" data-wa data-message="${messageFor(v)}">◉ Falar no WhatsApp</a><p class="specs">${v.year} &nbsp;•&nbsp; ${v.transmission} &nbsp;•&nbsp; ${v.mileage.toLocaleString('pt-BR')} km<br>${v.fuel} &nbsp;•&nbsp; ${v.color}</p><p class="price"><small>Valor</small>${money(v.price)}</p><p class="installment">A partir de: <b>${v.installment?money(v.installment)+'/mês':'[PARCELA A DEFINIR]'}</b></p><button class="details-btn" data-detail="${v.id}">Ver detalhes →</button></div></article>`}
 const featuredGrid=document.querySelector('#featured-grid'), inventoryGrid=document.querySelector('#inventory-grid');
