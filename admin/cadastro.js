@@ -3,6 +3,7 @@ const form=document.querySelector('#signup-form');
 const signupCard=document.querySelector('#signup-card');
 const successCard=document.querySelector('#success-card');
 let signupEmail='';
+const ADMIN_EMAIL='andrenevessato04@gmail.com';
 
 function setStatus(message,error=false,root=signupCard){const el=root.querySelector('.status');el.textContent=message;el.style.color=error?'#ff7b7b':'#24bd69'}
 
@@ -17,6 +18,7 @@ form.addEventListener('submit',async event=>{
   if(!client){setStatus('O serviço de cadastro está indisponível.',true);return}
   const values=Object.fromEntries(new FormData(form));
   if(values.password!==values.confirmPassword){setStatus('As senhas não são iguais.',true);return}
+  if(values.email.trim().toLowerCase()===ADMIN_EMAIL){setStatus('Este e-mail já está confirmado. Use “Entrar no painel” ou recupere sua senha.',true);setTimeout(()=>{location.href='recuperar.html'},1800);return}
   const submit=form.querySelector('[type="submit"]');
   submit.disabled=true;setStatus('Criando seu acesso e enviando a confirmação…');
   const redirectTo=`${location.origin}/admin/?confirmed=1`;
