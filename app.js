@@ -1,7 +1,7 @@
 const STORE_WHATSAPP_NUMBER = '';
 const store = { name: 'Loja do Preto', whatsapp: STORE_WHATSAPP_NUMBER };
 
-const vehicles = [
+let vehicles = [
   {id:'demo-001',brand:'Toyota',model:'Corolla',version:'XEi',year:2024,mileage:32000,transmission:'Automático',fuel:'Flex',color:'Preto',category:'Sedan',price:null,installment:null,featured:true,image:'assets/hero-showroom.png',whatsappNumber:'',whatsappMessage:'',features:[]},
   {id:'demo-002',brand:'Jeep',model:'Compass',version:'Limited',year:2023,mileage:41000,transmission:'Automático',fuel:'Flex',color:'Grafite',category:'SUV',price:null,installment:null,featured:true,image:'assets/hero-showroom.png',whatsappNumber:'',whatsappMessage:'',features:[]},
   {id:'demo-003',brand:'BMW',model:'320i',version:'Sport GP',year:2022,mileage:38000,transmission:'Automático',fuel:'Gasolina',color:'Preto',category:'Sedan',price:null,installment:null,featured:true,image:'assets/hero-showroom.png',whatsappNumber:'',whatsappMessage:'',features:[]},
@@ -32,5 +32,37 @@ const faqs=['Os veículos possuem garantia?','Vocês aceitam carro usado na troc
 function digits(v){return Number((v||'').replace(/\D/g,''))||0}document.querySelector('#finance-form').addEventListener('input',e=>{const f=e.currentTarget;const financed=Math.max(0,digits(f.value.value)-digits(f.down.value));const installment=financed?financed/+f.months.value*1.018:0;document.querySelector('#estimate').textContent=installment?money(installment)+' /mês':'R$ — /mês'});
 function handleForm(id,type){document.querySelector(id).addEventListener('submit',e=>{e.preventDefault();const f=e.currentTarget,status=f.querySelector('.form-status');if(!f.checkValidity()){f.reportValidity();status.textContent='Revise os campos obrigatórios.';return}status.textContent='Preparando sua solicitação…';setTimeout(()=>{const d=Object.fromEntries(new FormData(f));status.textContent='Recebemos sua solicitação! Abrindo o WhatsApp para continuar.';window.open(waLink(`Olá! Quero continuar minha solicitação de ${type}.\nDados: ${Object.entries(d).map(([k,v])=>`${k}: ${v}`).join(' | ')}`),'_blank')},500)})}handleForm('#finance-form','financiamento');handleForm('#trade-form','avaliação do meu carro');
 document.querySelectorAll('[name=phone]').forEach(i=>i.addEventListener('input',()=>{let v=i.value.replace(/\D/g,'').slice(0,11);i.value=v.replace(/(\d{2})(\d{5})(\d{0,4})/,'($1) $2-$3')}));document.querySelector('.menu').onclick=e=>{const n=document.querySelector('#nav');n.classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',n.classList.contains('open'))};document.querySelector('.filter-toggle').onclick=e=>{const f=document.querySelector('.filter-grid');f.classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',f.classList.contains('open'));e.currentTarget.textContent=f.classList.contains('open')?'Fechar filtros':'Abrir filtros'};
-bindWhatsApp();renderInventory();
+async function loadRemoteContent(){
+  if(!window.supabaseClient) return;
+  try{
+    const [{data:remoteVehicles,error:vehicleError},{data:settings,error:settingsError}]=await Promise.all([
+      window.supabaseClient.from('vehicles').select('*').eq('active',true).order('created_at',{ascending:false}),
+      window.supabaseClient.from('store_settings').select('*').eq('id',1).maybeSingle()
+    ]);
+    if(vehicleError||settingsError) throw vehicleError||settingsError;
+    if(settings?.whatsapp) store.whatsapp=settings.whatsapp;
+    if(remoteVehicles?.length){
+      vehicles=remoteVehicles.map(v=>({
+        ...v,
+        image:v.image_url||'assets/hero-showroom.png',
+        whatsappNumber:v.whatsapp_number||'',
+        whatsappMessage:v.whatsapp_message||'',
+        features:v.features||[]
+      }));
+      featuredGrid.innerHTML=vehicles.filter(v=>v.featured).map(card).join('');
+      brand.innerHTML='<option value="">Todas</option>';model.innerHTML='<option value="">Todos</option>';
+      [...new Set(vehicles.map(v=>v.brand))].sort().forEach(x=>brand.add(new Option(x,x)));
+      [...new Set(vehicles.map(v=>v.model))].sort().forEach(x=>model.add(new Option(x,x)));
+      renderInventory();bindDetails();
+    }
+    bindWhatsApp();
+  }catch(error){console.warn('Conteúdo remoto indisponível; usando dados demonstrativos.',error.message)}
+}
+bindWhatsApp();renderInventory();loadRemoteContent();
+if(window.supabaseClient){
+  window.supabaseClient.channel('site-content')
+    .on('postgres_changes',{event:'*',schema:'public',table:'vehicles'},loadRemoteContent)
+    .on('postgres_changes',{event:'*',schema:'public',table:'store_settings'},loadRemoteContent)
+    .subscribe();
+}
 
