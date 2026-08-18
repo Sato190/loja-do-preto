@@ -8,7 +8,7 @@ $('#login-form').addEventListener('submit',async e=>{e.preventDefault();status('
 const passwordInput=$('#password-input'),togglePassword=$('#toggle-password');
 passwordInput.addEventListener('input',()=>{togglePassword.hidden=!passwordInput.value;if(!passwordInput.value){passwordInput.type='password';togglePassword.setAttribute('aria-label','Mostrar senha');togglePassword.title='Mostrar senha'}});
 togglePassword.addEventListener('click',()=>{const willShow=passwordInput.type==='password';passwordInput.type=willShow?'text':'password';const label=willShow?'Ocultar senha':'Mostrar senha';togglePassword.setAttribute('aria-label',label);togglePassword.title=label;passwordInput.focus()});
-$('#signup').onclick=async()=>{const f=$('#login-form'),d=new FormData(f);if(!d.get('email')||!d.get('password')){status('Preencha e-mail e senha antes de criar o acesso.',true);return}const{error}=await client.auth.signUp({email:d.get('email'),password:d.get('password')});status(error?error.message:'Conta criada. Confira seu e-mail para confirmar o acesso.',!!error)};$('#logout').onclick=()=>client.auth.signOut();
+$('#signup').onclick=()=>{window.location.href='cadastro.html'};$('#logout').onclick=()=>client.auth.signOut();
 function changeTab(tab){$$('[data-panel]').forEach(p=>p.classList.toggle('hidden',p.dataset.panel!==tab));$$('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));$('#page-title').textContent={dashboard:'Visão geral',vehicles:'Veículos',settings:'Configurações'}[tab]}
 $$('[data-tab]').forEach(b=>b.onclick=()=>changeTab(b.dataset.tab));$$('[data-go]').forEach(b=>b.onclick=()=>changeTab(b.dataset.go));
 async function loadVehicles(){const{data,error}=await client.from('vehicles').select('*').order('created_at',{ascending:false});if(error){alert(error.message);return}allVehicles=data||[];renderVehicles(allVehicles);$('#stat-total').textContent=allVehicles.length;$('#stat-active').textContent=allVehicles.filter(v=>v.active).length;$('#stat-featured').textContent=allVehicles.filter(v=>v.featured).length}
@@ -19,5 +19,6 @@ form.addEventListener('submit',async e=>{e.preventDefault();if(e.submitter?.valu
 async function removeVehicle(id){if(!confirm('Excluir este veículo permanentemente?'))return;const{error}=await client.from('vehicles').delete().eq('id',id);if(error)alert(error.message);else loadVehicles()}
 async function loadSettings(){const{data}=await client.from('store_settings').select('*').eq('id',1).maybeSingle();if(data)for(const[k,v]of Object.entries(data))if($('#settings-form').elements[k])$('#settings-form').elements[k].value=v||''}
 $('#settings-form').addEventListener('submit',async e=>{e.preventDefault();const payload=Object.fromEntries(new FormData(e.target));payload.id=1;status('Salvando…',false,e.target);const{error}=await client.from('store_settings').upsert(payload);status(error?error.message:'Configurações publicadas com sucesso.',!!error,e.target)});
+if(new URLSearchParams(location.search).get('confirmed'))status('E-mail confirmado. Agora você já pode entrar no painel.');
 init();
 
