@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.lojadopreto.com.br/sitemap.xml
+Sitemap: https://loja-do-preto-projeto-sato.vercel.app/sitemap.xml
 
