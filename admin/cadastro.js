@@ -20,7 +20,7 @@ form.addEventListener('submit',async event=>{
   if(values.password!==values.confirmPassword){setStatus('As senhas não são iguais.',true);return}
   if(values.email.trim().toLowerCase()===ADMIN_EMAIL){setStatus('Este e-mail já está confirmado. Use “Entrar no painel” ou recupere sua senha.',true);setTimeout(()=>{location.href='recuperar.html'},1800);return}
   const submit=form.querySelector('[type="submit"]');
-  submit.disabled=true;setStatus('Criando seu acesso e enviando a confirmação…');
+  submit.disabled=true;setStatus('Enviando seu pedido de acesso…');
   const redirectTo=`${location.origin}/admin/?confirmed=1`;
   const {error}=await client.auth.signUp({email:values.email,password:values.password,options:{emailRedirectTo:redirectTo}});
   submit.disabled=false;
@@ -36,4 +36,3 @@ document.querySelector('#resend').addEventListener('click',async event=>{
   const {error}=await client.auth.resend({type:'signup',email:signupEmail,options:{emailRedirectTo:`${location.origin}/admin/?confirmed=1`}});
   event.currentTarget.disabled=false;setStatus(error?error.message:'E-mail reenviado. Confira também a caixa de spam.',!!error,successCard);
 });
-
