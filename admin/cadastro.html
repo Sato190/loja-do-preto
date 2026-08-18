@@ -16,7 +16,7 @@
       <img src="https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/logo-optimized.jpg" alt="Loja do Preto">
       <p class="overline">Primeiro acesso</p>
       <h1>Crie agora<br>o seu login.</h1>
-      <p>Cadastre seu e-mail e crie uma senha. Enviaremos uma mensagem para você confirmar o endereço.</p>
+      <p>Cadastre seu e-mail e crie uma senha. Depois de confirmar o endereço, seu pedido será enviado ao administrador para aprovação.</p>
       <form id="signup-form">
         <label>E-mail<input required type="email" name="email" autocomplete="email" placeholder="seuemail@exemplo.com"></label>
         <label>Senha<div class="password-field"><input required id="signup-password" type="password" name="password" minlength="8" autocomplete="new-password" placeholder="Mínimo de 8 caracteres"><button class="password-toggle" type="button" data-toggle="signup-password" aria-label="Mostrar senha" title="Mostrar senha" hidden>👁️</button></div></label>
@@ -30,7 +30,7 @@
       <div class="success-icon">✓</div>
       <p class="overline">Cadastro realizado</p>
       <h1>Confira<br>seu e-mail.</h1>
-      <p>Enviamos um link de confirmação para <strong id="sent-email"></strong>. Abra a mensagem e confirme o endereço para liberar seu acesso.</p>
+      <p>Enviamos um link de confirmação para <strong id="sent-email"></strong>. Depois da confirmação, seu pedido ficará aguardando a aprovação do administrador.</p>
       <button class="primary" id="resend" type="button">Reenviar e-mail</button>
       <p class="status" role="status" aria-live="polite"></p>
       <a class="back-login" href="./">Voltar para o login</a>
@@ -41,4 +41,3 @@
   <script src="cadastro.js"></script>
 </body>
 </html>
-
