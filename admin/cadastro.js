@@ -23,6 +23,6 @@ form.addEventListener('submit',async event=>{
   submit.disabled=false;
   if(error){setStatus(error.message,true);return}
   if(data.session){location.href='./?pending=1';return}
-  setStatus('Cadastro criado, mas a confirmação de e-mail ainda está ativa no Supabase. Desative “Confirm Email” para liberar o acesso imediato.',true);
+  setStatus('Solicitação enviada com sucesso. Aguarde a aprovação do administrador.');
 });
 
