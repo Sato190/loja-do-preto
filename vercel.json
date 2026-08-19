@@ -1,17 +1,16 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        }
-      ]
-    }
-  ],
-  "rewrites": [
-    { "source": "/estoque/:slug", "destination": "/vehicle.html?slug=:slug" }
+  "$schema":"https://openapi.vercel.sh/vercel.json",
+  "cleanUrls":true,
+  "trailingSlash":false,
+  "headers":[{"source":"/(.*)","headers":[{"key":"Cache-Control","value":"no-cache, no-store, must-revalidate"}]}],
+  "rewrites":[
+    {"source":"/estoque/:slug","destination":"/vehicle.html?slug=:slug"},
+    {"source":"/estoque","destination":"/estoque.html"},
+    {"source":"/destaques","destination":"/destaques.html"},
+    {"source":"/venda-seu-carro","destination":"/venda.html"},
+    {"source":"/financiamento","destination":"/financiamento.html"},
+    {"source":"/nossa-historia","destination":"/historia.html"},
+    {"source":"/contato","destination":"/contato.html"}
   ]
 }
+
