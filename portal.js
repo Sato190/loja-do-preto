@@ -1,9 +1,9 @@
-(()=>{
+(()=>{if(!document.querySelector('script[src$="navigation.js"]')){const s=document.createElement('script');s.src='/navigation.js';document.head.append(s)}
   const db=window.supabaseClient;
   const money=n=>n==null?'Consulte':new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}).format(n);
   const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let settings={};
-  const page=document.body.dataset.page||'home';
+  const page=document.body.dataset.page||'home';const anchor=(id,el)=>{if(el&&!document.getElementById(id)){const a=document.createElement('span');a.id=id;a.className='route-anchor';el.before(a)}};anchor('avaliacao',document.querySelector('#sell-form'));anchor('simulacao',document.querySelector('#finance-form'));anchor('como-funciona',document.querySelector('.finance-layout')?.closest('.portal-section')?.nextElementSibling);if(location.hash)setTimeout(()=>document.querySelector(location.hash)?.scrollIntoView(),350);
   document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('active',a.dataset.nav===page));
   const header=document.querySelector('.portal-header');
   addEventListener('scroll',()=>header?.classList.toggle('compact',scrollY>40),{passive:true});
