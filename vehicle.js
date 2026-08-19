@@ -9,7 +9,7 @@ function contactMessage(context='mais informações') { return `Olá! Estou vend
 function setLinks() { document.querySelectorAll('[data-context]').forEach(a=>{a.href=wa(contactMessage(a.dataset.context),vehicle.whatsapp_number||settings.whatsapp);a.target='_blank';a.rel='noopener'});const header=document.querySelector('#header-contact');header.href=wa(contactMessage(),vehicle.whatsapp_number||settings.whatsapp);header.target='_blank'; }
 function render() {
   images=[...new Set([vehicle.image_url,...(vehicle.image_urls||[])].filter(Boolean))]; if(!images.length)images=['https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/hero-showroom.jpg'];
-  const features=vehicle.features||[],status=({available:'Disponível',reserved:'Reservado',sold:'Vendido'})[vehicle.status||'available'];
+  const features=vehicle.features||[],status=({available:'Disponível',reserved:'Reservado',preparing:'Em preparação',sold:'Vendido'})[vehicle.status||'available'];
   const fit=[vehicle.category,vehicle.transmission,`Modelo ${vehicle.year}`,vehicle.fuel,...(vehicle.tags||[])].filter(Boolean).slice(0,6);
   document.title=`${vehicle.brand} ${vehicle.model} ${vehicle.version||''} ${vehicle.year} | Loja do Preto`;
   document.querySelector('meta[name="description"]').content=`Conheça o ${vehicle.brand} ${vehicle.model} ${vehicle.version||''} ${vehicle.year} disponível na Loja do Preto.`;
@@ -22,3 +22,4 @@ function render() {
 async function init(){try{if(!client)throw new Error('Catálogo indisponível');const[{data:v,error},{data:s}]=await Promise.all([client.from('vehicles').select('*').or(`slug.eq.${requested},id.eq.${requested}`).maybeSingle(),client.from('store_settings').select('*').eq('id',1).maybeSingle()]);if(error||!v)throw error||new Error('Veículo não encontrado');vehicle=v;settings=s||{};render()}catch(error){document.querySelector('#vehicle-content').innerHTML=`<div class="vehicle-error"><p class="eyebrow dark">Estoque</p><h1>Veículo não encontrado.</h1><p>Ele pode ter sido removido ou ainda não está publicado.</p><a class="btn btn-dark" href="index.html#estoque">Voltar ao estoque</a></div>`}}
 document.querySelector('#sticky-favorite').onclick=()=>{const key='ldp-favorites',list=JSON.parse(localStorage.getItem(key)||'[]'),id=String(vehicle.id),next=list.includes(id)?list.filter(x=>x!==id):[...list,id];localStorage.setItem(key,JSON.stringify(next));document.querySelector('#sticky-favorite').textContent=next.includes(id)?'♥ Salvo':'♡ Interesse'};
 init();
+
