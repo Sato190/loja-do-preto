@@ -1,8 +1,6 @@
 const client=window.supabaseClient;
 const form=document.querySelector('#signup-form');
 const signupCard=document.querySelector('#signup-card');
-const successCard=document.querySelector('#success-card');
-let signupEmail='';
 const ADMIN_EMAIL='andrenevessato04@gmail.com';
 
 function setStatus(message,error=false,root=signupCard){const el=root.querySelector('.status');el.textContent=message;el.style.color=error?'#ff7b7b':'#24bd69'}
@@ -20,19 +18,11 @@ form.addEventListener('submit',async event=>{
   if(values.password!==values.confirmPassword){setStatus('As senhas não são iguais.',true);return}
   if(values.email.trim().toLowerCase()===ADMIN_EMAIL){setStatus('Este e-mail já está confirmado. Use “Entrar no painel” ou recupere sua senha.',true);setTimeout(()=>{location.href='recuperar.html'},1800);return}
   const submit=form.querySelector('[type="submit"]');
-  submit.disabled=true;setStatus('Enviando seu pedido de acesso…');
-  const redirectTo=`${location.origin}/admin/?confirmed=1`;
-  const {error}=await client.auth.signUp({email:values.email,password:values.password,options:{emailRedirectTo:redirectTo}});
+  submit.disabled=true;setStatus('Criando seu acesso…');
+  const {data,error}=await client.auth.signUp({email:values.email,password:values.password});
   submit.disabled=false;
   if(error){setStatus(error.message,true);return}
-  signupEmail=values.email;
-  document.querySelector('#sent-email').textContent=signupEmail;
-  signupCard.classList.add('hidden');successCard.classList.remove('hidden');
+  if(data.session){location.href='./?pending=1';return}
+  setStatus('Cadastro criado, mas a confirmação de e-mail ainda está ativa no Supabase. Desative “Confirm Email” para liberar o acesso imediato.',true);
 });
 
-document.querySelector('#resend').addEventListener('click',async event=>{
-  if(!signupEmail)return;
-  event.currentTarget.disabled=true;setStatus('Reenviando…',false,successCard);
-  const {error}=await client.auth.resend({type:'signup',email:signupEmail,options:{emailRedirectTo:`${location.origin}/admin/?confirmed=1`}});
-  event.currentTarget.disabled=false;setStatus(error?error.message:'E-mail reenviado. Confira também a caixa de spam.',!!error,successCard);
-});
