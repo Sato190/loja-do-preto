@@ -35,3 +35,51 @@ p{letter-spacing:0}
 .footer-bottom{font-size:12px}
 .modal-info h2{font-size:clamp(40px,4.5vw,52px);line-height:1.08}
 @media(max-width:720px){.hero h1{font-size:clamp(38px,11vw,46px);line-height:1.04}.section h2,.finance h2,.why h2,.about h2,.final-cta h2{font-size:clamp(30px,8.5vw,36px);line-height:1.1}.quick h2{font-size:clamp(26px,7vw,32px)}.hero .lead,.section-title p,.finance p,.about p,.final-cta p{font-size:16px}.modal-info h2{font-size:clamp(30px,8.5vw,36px)}}
+
+/* Global alignment and spacing review */
+.container{width:min(1180px,calc(100% - 48px))}
+.btn-ghost{background:transparent}
+.section-title,.quick-head{align-items:flex-end}
+.section-title>div:first-child,.quick-head>div:first-child{max-width:780px}
+.section-title h2,.section-title p,.quick-head h2,.quick-head p{max-width:100%}
+.section-title .text-link{flex:0 0 auto;margin-bottom:4px}
+.filter-grid>*{min-width:0}
+.filter-grid .btn{align-self:end;width:100%}
+.vehicle-grid{align-items:stretch}
+.vehicle-card{display:flex;flex-direction:column;height:100%}
+.vehicle-body{display:flex;flex:1;flex-direction:column}
+.vehicle-body .details-btn{margin-top:auto}
+.split>*{min-width:0}
+.form-card{width:100%}
+.trade{align-items:stretch}
+.trade>div:first-child{display:flex;flex-direction:column}
+.trade-photo{margin-top:auto}
+.benefit-grid article{display:flex;flex-direction:column;justify-content:flex-start}
+.proof-grid{align-items:stretch}
+.proof-grid>*{height:100%}
+.final-cta .container{display:flex;flex-direction:column;align-items:center}
+.final-cta .container>p{max-width:680px}
+.footer-grid{align-items:start}
+.footer-grid>div{min-width:0}
+@media(max-width:720px){
+  .container{width:min(100% - 32px,1180px)}
+  .section{padding:76px 0}
+  .quick{padding:32px 0}
+  .quick-head{flex-direction:column;align-items:stretch;gap:18px}
+  .filter-toggle{width:100%;justify-content:center}
+  .section-title{gap:14px}
+  .section-title .text-link{align-self:flex-start;margin:0}
+  .sort,.sort label,.sort select{width:100%}
+  .sort select{min-width:0}
+  .inventory-bar{align-items:center;gap:16px}
+  .trade-photo{margin-top:24px}
+  .proof-grid{gap:14px}
+  .footer-grid{gap:32px}
+}
+@media(max-width:430px){
+  .hero-content{margin-left:16px;margin-right:16px}
+  .section-title{align-items:stretch}
+  .inventory-bar{font-size:13px}
+  .footer-grid{gap:28px}
+}
+
