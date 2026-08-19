@@ -16,7 +16,7 @@
       <img src="https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/logo-clean.png" alt="Loja do Preto">
       <p class="overline">Primeiro acesso</p>
       <h1>Crie agora<br>o seu login.</h1>
-      <p>Cadastre seu e-mail e crie uma senha. Depois de confirmar o endereço, seu pedido será enviado ao administrador para aprovação.</p>
+      <p>Cadastre seu e-mail e crie uma senha. Seu pedido será enviado diretamente ao administrador e ficará bloqueado até a aprovação.</p>
       <form id="signup-form">
         <label>E-mail<input required type="email" name="email" autocomplete="email" placeholder="seuemail@exemplo.com"></label>
         <label>Senha<div class="password-field"><input required id="signup-password" type="password" name="password" minlength="8" autocomplete="new-password" placeholder="Mínimo de 8 caracteres"><button class="password-toggle" type="button" data-toggle="signup-password" aria-label="Mostrar senha" title="Mostrar senha" hidden>👁️</button></div></label>
@@ -24,16 +24,7 @@
         <button class="primary" type="submit">Criar meu acesso</button>
         <p class="status" role="status" aria-live="polite"></p>
       </form>
-      <p class="login-hint">Já confirmou seu e-mail? <a href="./">Entrar no painel</a></p>
-    </section>
-    <section class="signup-card success hidden" id="success-card">
-      <div class="success-icon">✓</div>
-      <p class="overline">Cadastro realizado</p>
-      <h1>Confira<br>seu e-mail.</h1>
-      <p>Enviamos um link de confirmação para <strong id="sent-email"></strong>. Depois da confirmação, seu pedido ficará aguardando a aprovação do administrador.</p>
-      <button class="primary" id="resend" type="button">Reenviar e-mail</button>
-      <p class="status" role="status" aria-live="polite"></p>
-      <a class="back-login" href="./">Voltar para o login</a>
+      <p class="login-hint">Já possui cadastro? <a href="./">Entrar no painel</a></p>
     </section>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.1"></script>
@@ -41,3 +32,4 @@
   <script src="cadastro.js"></script>
 </body>
 </html>
+
