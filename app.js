@@ -1,3 +1,4 @@
+if(!document.querySelector('link[href$="portal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/portal.css';document.head.append(l)}if(!document.querySelector('script[src$="navigation.js"]')){const s=document.createElement('script');s.src='/navigation.js';document.head.append(s)}
 const STORE_WHATSAPP_NUMBER = '';
 const store = { name: 'Loja do Preto', whatsapp: STORE_WHATSAPP_NUMBER };
 const whatsappIcon='<span class="wa-icon" aria-hidden="true"></span>';
@@ -127,3 +128,4 @@ window.addEventListener('scroll',()=>{const max=document.documentElement.scrollH
 const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target)}}),{threshold:.12});document.querySelectorAll('main>section:not(.hero),.vehicle-card').forEach(el=>{el.classList.add('reveal-on-scroll');revealObserver.observe(el)});
 document.addEventListener('click',e=>{const wa=e.target.closest('[data-wa]');if(wa)track('whatsapp_click',{message:wa.dataset.message||'',path:location.pathname})});
 setJourney('buy');renderDeal();updateFavoriteUI();renderCompareTray();renderAuxiliaryCollections();
+
