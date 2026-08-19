@@ -8,7 +8,7 @@ function showImage(next) { imageIndex=(next+images.length)%images.length; docume
 function contactMessage(context='mais informações') { return `Olá! Estou vendo o ${vehicle.brand} ${vehicle.model} ${vehicle.version||''} ${vehicle.year} no site da Loja do Preto e gostaria de consultar ${context}.`; }
 function setLinks() { document.querySelectorAll('[data-context]').forEach(a=>{a.href=wa(contactMessage(a.dataset.context),vehicle.whatsapp_number||settings.whatsapp);a.target='_blank';a.rel='noopener'});const header=document.querySelector('#header-contact');header.href=wa(contactMessage(),vehicle.whatsapp_number||settings.whatsapp);header.target='_blank'; }
 function render() {
-  images=[...new Set([vehicle.image_url,...(vehicle.image_urls||[])].filter(Boolean))]; if(!images.length)images=['assets/hero-showroom.jpg'];
+  images=[...new Set([vehicle.image_url,...(vehicle.image_urls||[])].filter(Boolean))]; if(!images.length)images=['https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/hero-showroom.jpg'];
   const features=vehicle.features||[],status=({available:'Disponível',reserved:'Reservado',sold:'Vendido'})[vehicle.status||'available'];
   const fit=[vehicle.category,vehicle.transmission,`Modelo ${vehicle.year}`,vehicle.fuel,...(vehicle.tags||[])].filter(Boolean).slice(0,6);
   document.title=`${vehicle.brand} ${vehicle.model} ${vehicle.version||''} ${vehicle.year} | Loja do Preto`;
