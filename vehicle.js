@@ -1,3 +1,4 @@
+if(!document.querySelector('script[src$="navigation.js"]')){const s=document.createElement('script');s.src='/navigation.js';document.head.append(s)}
 const client = window.supabaseClient;
 const requested = new URLSearchParams(location.search).get('slug') || location.pathname.split('/').filter(Boolean).pop();
 const money = n => n ? Number(n).toLocaleString('pt-BR', {style:'currency',currency:'BRL',maximumFractionDigits:0}) : 'Consulte o valor';
