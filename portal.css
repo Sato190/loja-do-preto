@@ -8,3 +8,13 @@ body{min-width:0}.portal-container{max-width:1180px}.portal-btn,.portal-form inp
 @media(max-width:720px){.portal-container{width:calc(100% - 32px)}.page-hero{padding:58px 0 46px}.page-hero h1,.portal-section h2{font-size:clamp(30px,9vw,40px);line-height:1.08;letter-spacing:-.035em}.page-hero:after{right:-18px;top:-10px;font-size:110px}.portal-section{padding:60px 0}.section-head{gap:12px;margin-bottom:26px}.portal-form{gap:14px;padding:20px 16px}.portal-form .portal-btn{width:100%}.value-grid,.process-grid{gap:10px}.value-grid article,.process-grid article{padding:21px}.portal-footer{padding:54px 0 calc(24px + env(safe-area-inset-bottom))}.portal-footer-grid{grid-template-columns:1fr;gap:22px}.portal-footer-grid>div:last-child{grid-column:auto}.portal-footer-bottom{margin-top:32px}.contact-list a,.contact-list div{padding:16px 0}.map-placeholder{min-height:300px}.brand-shield{padding:22px}.gallery-grid img,.gallery-placeholder{height:auto;aspect-ratio:4/3}.search-shell{padding:22px 16px}.search-result{gap:12px;align-items:start}}
 @media(max-width:360px){.portal-container{width:calc(100% - 28px)}.page-hero h1,.portal-section h2{font-size:30px}.portal-form{padding:18px 14px}.timeline article{padding:22px 0}}
 
+/* Pre-production editorial history */
+.feature-layout{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:stretch;min-height:clamp(520px,46vw,680px)}
+.feature-layout>div:last-child{display:flex;flex-direction:column;justify-content:center;padding-block:clamp(20px,4vw,56px)}
+.feature-layout>div:last-child>p:not(.eyebrow){max-width:560px;color:#c4c7cc;font-size:clamp(16px,1.35vw,19px);line-height:1.75}
+.brand-shield.history-media{min-height:100%;padding:0;border:0;border-radius:12px;overflow:hidden;background:#090a0c}
+.brand-shield.history-media img{width:100%;height:100%;min-height:clamp(520px,46vw,680px);object-fit:cover;object-position:center;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.portal-footer img{height:auto;object-fit:contain;filter:none}
+@media(max-width:900px){.feature-layout{grid-template-columns:1fr;min-height:0;gap:34px}.brand-shield.history-media,.brand-shield.history-media img{min-height:0}.brand-shield.history-media img{aspect-ratio:16/10}.feature-layout>div:last-child{padding-block:10px 0}}
+@media(max-width:520px){.brand-shield.history-media img{aspect-ratio:4/3;object-position:center}.feature-layout{gap:28px}.portal-footer img{width:124px}}
+
