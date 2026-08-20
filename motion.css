@@ -43,3 +43,14 @@
 }
 @media(prefers-reduced-motion:reduce){.motion-signature path{stroke-dashoffset:0}.showroom-reveal,.timeline article,.negotiation-panel h1,.negotiation-panel .price{opacity:1!important;transform:none!important}.headlight-title:after{display:none}.portal-header .portal-logo,.site-header .portal-logo{animation:none}.hero-bg{transform:none!important}.vehicle-gallery-main>img{transition:none}}
 
+/* Editorial reveals and highlight showroom reflection */
+.history-media{clip-path:inset(0 100% 0 0);transition:clip-path 650ms var(--motion-ease)}
+.history-media.is-visible,.feature-layout.history-visible .history-media{clip-path:inset(0)}
+.feature-layout>div:last-child{opacity:0;transform:translateY(12px);transition:opacity 520ms var(--motion-ease) 120ms,transform 520ms var(--motion-ease) 120ms}
+.feature-layout.history-visible>div:last-child{opacity:1;transform:none}
+.editorial-lead{position:relative;isolation:isolate}
+.editorial-lead:after{content:'';position:absolute;inset:-20% auto -20% -28%;width:13%;z-index:2;pointer-events:none;background:linear-gradient(105deg,transparent,rgba(255,255,255,.18),transparent);transform:translateX(-240%) skewX(-12deg)}
+@media(hover:hover) and (pointer:fine){.editorial-lead:hover:after{transform:translateX(980%) skewX(-12deg);transition:transform 720ms var(--motion-ease)}}
+@media(max-width:700px){.history-media{transition-duration:480ms}.feature-layout>div:last-child{transition-delay:70ms}.editorial-lead:after{display:none}}
+@media(prefers-reduced-motion:reduce){.history-media{clip-path:none!important}.feature-layout>div:last-child{opacity:1!important;transform:none!important}}
+
