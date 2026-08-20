@@ -1,0 +1,45 @@
+:root{--motion-ease:cubic-bezier(.22,1,.36,1);--motion-fast:220ms;--motion-reveal:560ms}
+.motion-signature{position:relative;width:min(1180px,calc(100% - 40px));height:38px;margin:-19px auto;z-index:2;color:#777;pointer-events:none;overflow:hidden}
+.motion-signature svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1;vector-effect:non-scaling-stroke;opacity:.48}
+.motion-signature path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 680ms var(--motion-ease)}
+.motion-signature.is-visible path{stroke-dashoffset:0}
+.motion-signature.light{color:#d9dade}
+.headlight-title{position:relative;overflow:hidden}
+.headlight-title:after{content:'';position:absolute;left:0;bottom:-8px;width:42%;height:1px;background:linear-gradient(90deg,transparent,#fff 52%,transparent);opacity:0;transform:translateX(-115%)}
+.headlight-title.is-visible:after{animation:headlight-pass 620ms var(--motion-ease) 100ms both}
+.section:not(.section-dark) .headlight-title:after,.portal-section:not(.dark) .headlight-title:after,.vehicle-page .headlight-title:after{background:linear-gradient(90deg,transparent,#2b2d31 52%,transparent)}
+@keyframes headlight-pass{35%{opacity:.75}to{opacity:0;transform:translateX(260%)}}
+.showroom-reveal{opacity:0;transform:translateY(14px);transition:opacity var(--motion-reveal) var(--motion-ease),transform var(--motion-reveal) var(--motion-ease)}
+.showroom-reveal.is-visible{opacity:1;transform:none}
+.vehicle-card.showroom-reveal,.catalog-card.showroom-reveal{transition-delay:var(--reveal-delay,0ms)}
+.vehicle-photo,.card-media,.vehicle-gallery-main{isolation:isolate}
+.vehicle-photo:after,.card-media:after{content:'';position:absolute;inset:-30% auto -30% -40%;width:22%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.22),transparent);transform:translateX(-220%) skewX(-12deg);pointer-events:none;z-index:1}
+@media(hover:hover) and (pointer:fine){.vehicle-card:hover .vehicle-photo:after,.catalog-card:hover .card-media:after{transform:translateX(720%) skewX(-12deg);transition:transform 650ms var(--motion-ease)}.vehicle-card:hover,.catalog-card:hover{transform:translateY(-3px)!important}.vehicle-card:hover img,.catalog-card:hover img{transform:scale(1.015)}.vehicle-secondary a{transition:transform var(--motion-fast) var(--motion-ease)}.vehicle-card:hover .vehicle-secondary a{transform:translateX(3px)}}
+.vehicle-card:active,.catalog-card:active{transform:scale(.992)}
+.vehicle-photo img,.card-media img{transition:transform 480ms var(--motion-ease),opacity 260ms ease}
+.vehicle-gallery-main>img{transition:opacity 180ms ease,transform 360ms var(--motion-ease)}
+.vehicle-gallery-main>img.gallery-changing{opacity:.25;transform:translateX(6px)}
+.vehicle-gallery-progress{position:absolute;left:50%;bottom:26px;width:84px;height:2px;transform:translateX(-50%);background:rgba(255,255,255,.25);z-index:2}
+.vehicle-gallery-progress span{display:block;width:var(--gallery-progress,0%);height:100%;background:#fff;transition:width 260ms var(--motion-ease)}
+.motion-number{font-variant-numeric:tabular-nums}
+.negotiation-panel h1,.negotiation-panel .price{opacity:0;transform:translateY(10px);transition:opacity 480ms var(--motion-ease),transform 480ms var(--motion-ease)}
+.negotiation-panel.motion-ready h1,.negotiation-panel.motion-ready .price{opacity:1;transform:none}.negotiation-panel.motion-ready .price{transition-delay:110ms}
+.timeline article{transition:opacity 520ms var(--motion-ease),transform 520ms var(--motion-ease)}
+.timeline article:not(.is-visible){opacity:0;transform:translateX(-12px)}
+.portal-header .portal-logo,.site-header .portal-logo{animation:logo-arrive 500ms var(--motion-ease) both}
+@keyframes logo-arrive{from{opacity:0;transform:scale(.97)}}
+.hero-bg{will-change:transform;transition:transform 80ms linear}
+@media(max-width:700px){
+  .site-header .desktop-wa,.site-header .icon-button{display:none!important}.site-header .portal-actions{gap:0}.site-header .portal-brand{width:102px}
+  .motion-signature{width:calc(100% - 28px);height:28px;margin:-14px auto}
+  .headlight-title:after{display:none}.showroom-reveal{transform:translateY(8px);transition-duration:420ms}
+  .vehicle-photo:after,.card-media:after{display:none}.hero-bg{will-change:auto!important;transform:none!important}
+  .vehicle-card,.catalog-card{box-shadow:none!important}.vehicle-actions-top button:nth-child(2),.card-compare,.card-kind{display:none}
+  .vehicle-card .tag+.new-badge,.catalog-card .card-badges span:nth-child(n+2){display:none}
+  .vehicle-spec-list li:nth-child(n+4){display:none}.card-specs span:nth-child(n+4){display:none}
+  .vehicle-secondary{grid-template-columns:1fr}.vehicle-secondary button{display:none}
+  .catalog-tools .filters.open{animation:sheet-in 300ms var(--motion-ease) both;box-shadow:0 -12px 45px rgba(0,0,0,.12)}
+  @keyframes sheet-in{from{opacity:0;transform:translateY(14px)}}
+}
+@media(prefers-reduced-motion:reduce){.motion-signature path{stroke-dashoffset:0}.showroom-reveal,.timeline article,.negotiation-panel h1,.negotiation-panel .price{opacity:1!important;transform:none!important}.headlight-title:after{display:none}.portal-header .portal-logo,.site-header .portal-logo{animation:none}.hero-bg{transform:none!important}.vehicle-gallery-main>img{transition:none}}
+
