@@ -4,7 +4,7 @@
   "trailingSlash":false,
   "headers":[{"source":"/(.*)","headers":[{"key":"Cache-Control","value":"no-cache, no-store, must-revalidate"}]}],
   "rewrites":[
-    {"source":"/estoque/:slug","destination":"/vehicle.html?slug=:slug"},
+    {"source":"/estoque/:slug","destination":"/vehicle?slug=:slug"},
     {"source":"/estoque","destination":"/estoque.html"},
     {"source":"/destaques","destination":"/destaques.html"},
     {"source":"/venda-seu-carro","destination":"/venda.html"},
