@@ -22,10 +22,10 @@
   }
   function renderHistory(){
     const title=settings.history_title||'Nossa história';
-    const text=settings.history_text||'[HISTÓRIA A DEFINIR]';
+    const text=settings.history_text||'Conteúdo institucional aguardando validação final pela Loja do Preto.';
     document.querySelector('[data-history-title]')?.replaceChildren(document.createTextNode(title));
     document.querySelector('[data-history-text]')?.replaceChildren(document.createTextNode(text));
-    const logo=document.querySelector('[data-history-logo]'); if(logo) logo.src=settings.history_logo_url||'assets/logo-clean.png';
+    const logo=document.querySelector('[data-history-logo]'); if(logo){logo.src=settings.history_image_url||settings.hero_image_url||'assets/hero-showroom.jpg';logo.alt='Ambiente da Loja do Preto';logo.closest('.brand-shield')?.classList.add('history-media')}
     const timeline=document.querySelector('[data-timeline]');
     if(timeline){const items=Array.isArray(settings.history_timeline)?settings.history_timeline:[];timeline.innerHTML=items.length?items.map(i=>`<article><strong>${safe(i.year)}</strong><div><h3>${safe(i.title)}</h3><p>${safe(i.text)}</p></div></article>`).join(''):'<article><strong>—</strong><div><h3>Linha do tempo</h3><p>Conteúdo disponível para edição no painel administrativo.</p></div></article>'}
     const values=document.querySelector('[data-values]'); if(values){const items=Array.isArray(settings.store_values)?settings.store_values:[];values.innerHTML=(items.length?items:[{title:'Transparência',text:'Edite este conteúdo no painel.'},{title:'Atendimento',text:'Edite este conteúdo no painel.'},{title:'Curadoria',text:'Edite este conteúdo no painel.'},{title:'Confiança',text:'Edite este conteúdo no painel.'}]).map((i,n)=>`<article><b>0${n+1}</b><h3>${safe(i.title)}</h3><p>${safe(i.text)}</p></article>`).join('')}
