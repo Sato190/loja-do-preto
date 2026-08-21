@@ -1,4 +1,4 @@
-(()=>{if(!document.querySelector('script[src$="navigation.js"]')){const s=document.createElement('script');s.src='/navigation.js';document.head.append(s)}
+(()=>{if(!document.querySelector('link[href$="motion.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/motion.css';document.head.append(l)}if(!document.querySelector('script[src$="navigation.js"]')){const s=document.createElement('script');s.src='/navigation.js';document.head.append(s)}if(!document.querySelector('script[src$="motion.js"]')){const s=document.createElement('script');s.src='/motion.js';document.head.append(s)}
   const db=window.supabaseClient;
   const money=n=>n==null?'Consulte':new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}).format(n);
   const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

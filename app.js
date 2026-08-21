@@ -1,4 +1,4 @@
-if(!document.querySelector('link[href$="portal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/portal.css';document.head.append(l)}if(!document.querySelector('script[src$="navigation.js"]')){const s=document.createElement('script');s.src='/navigation.js';document.head.append(s)}
+if(!document.querySelector('link[href$="portal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/portal.css';document.head.append(l)}if(!document.querySelector('link[href$="motion.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/motion.css';document.head.append(l)}if(!document.querySelector('script[src$="navigation.js"]')){const s=document.createElement('script');s.src='/navigation.js';document.head.append(s)}if(!document.querySelector('script[src$="motion.js"]')){const s=document.createElement('script');s.src='/motion.js';document.head.append(s)}
 const STORE_WHATSAPP_NUMBER = '';
 const store = { name: 'Loja do Preto', whatsapp: STORE_WHATSAPP_NUMBER };
 const whatsappIcon='<span class="wa-icon" aria-hidden="true"></span>';
@@ -64,7 +64,7 @@ async function loadRemoteContent(){
     if(remoteVehicles?.length){
       vehicles=remoteVehicles.map(v=>({
         ...v,
-        image:v.image_url||'https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/hero-showroom.jpg',
+        image:v.image_url||'/assets/hero-showroom.png',
         whatsappNumber:v.whatsapp_number||'',
         whatsappMessage:v.whatsapp_message||'',
         features:v.features||[]

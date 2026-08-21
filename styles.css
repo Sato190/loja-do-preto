@@ -108,3 +108,7 @@ body{min-width:0}.container{max-width:1180px}.btn,.details-btn,.filter-grid inpu
 @media(max-width:360px){.journey-tabs,.horizontal-rail,.vehicle-rail,.mode-grid{max-width:100%;min-width:0}.mode-layout>*{min-width:0}.hero-bg{transform:none!important}}
 @media(max-width:430px){.footer-brand{width:100%;min-width:0;gap:14px}.footer-brand img{width:120px;flex:0 0 120px}.footer-brand span{min-width:0;overflow-wrap:anywhere}}
 
+/* Local brand assets: resilient in production and preview environments. */
+.hero-bg{background-image:url('/assets/hero-showroom.png')}
+.final-cta{background-image:linear-gradient(rgba(4,5,7,.77),rgba(4,5,7,.9)),url('/assets/hero-showroom.png')}
+
