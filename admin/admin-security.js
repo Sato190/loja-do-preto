@@ -1,5 +1,5 @@
 (()=>{
-  const allowed=()=>typeof currentRole!=='undefined'&&['owner','manager'].includes(currentRole);
+  let securityRole=null;const allowed=()=>['owner','manager'].includes(securityRole);
   const icon={SEGURO:'✅',FUNCIONANDO:'✅',TESTADO:'✅',ATENÇÃO:'⚠️',PARCIAL:'🟡','NÃO VERIFICADO':'❓',BLOQUEADO:'⛔',ERRO:'❌',CRÍTICO:'🚨','NÃO APLICÁVEL':'➖','NÃO CONECTADO':'➖'};
   const tone=s=>['SEGURO','FUNCIONANDO','TESTADO'].includes(s)?'safe':s==='CRÍTICO'||s==='ERRO'?'danger':['ATENÇÃO','PARCIAL'].includes(s)?'warn':'neutral';
   const badge=s=>`<span class="security-status ${tone(s)}">${icon[s]||'•'} ${s}</span>`;
@@ -9,8 +9,8 @@
   let latest=null,live=[];
   function showTab(){if(!allowed())return;document.querySelectorAll('[data-panel]').forEach(p=>p.classList.toggle('hidden',p!==panel));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b!==nav));nav.classList.add('active');document.querySelector('#page-title').textContent='Segurança';document.querySelector('#breadcrumb-current').textContent='Segurança';document.body.classList.remove('admin-menu-open');loadHistory()}
   nav.onclick=showTab;
-  async function waitForRole(){for(let i=0;i<30&&!currentRole;i++)await new Promise(r=>setTimeout(r,200));nav.hidden=!allowed()}
-  waitForRole();
+  async function loadSecurityRole(){const{data:{user}}=await window.supabaseClient.auth.getUser();if(!user)return;const{data}=await window.supabaseClient.from('admin_profiles').select('role,active').eq('user_id',user.id).maybeSingle();securityRole=data?.active?data.role:null;nav.hidden=!allowed()}
+  loadSecurityRole();
   const step=text=>{const root=document.querySelector('#security-content');root.innerHTML=`<div class="security-card"><strong>${esc(text)}</strong><div class="security-progress"><span style="width:45%"></span></div><p class="security-note">Somente consultas e testes não destrutivos.</p></div>`};
   async function checkHeaders(){const response=await fetch(location.origin+'/',{method:'HEAD',cache:'no-store'}),required=['content-security-policy','x-content-type-options','referrer-policy','permissions-policy','strict-transport-security'];return required.map(name=>{const value=response.headers.get(name);return{category:'Headers',title:name,status:value?'SEGURO':'ERRO',severity:value?'P3':'P1',description:value?value.slice(0,150):'Header ausente',method:'HEAD no site publicado'}})}
   async function checkLinks(){const paths=['/','/estoque','/destaques','/venda-seu-carro','/financiamento','/nossa-historia','/contato','/admin','/admin/conexoes'],rows=[];for(const path of paths){try{const r=await fetch(path,{method:'HEAD',cache:'no-store'});rows.push({category:'Links',title:path,status:r.ok?'FUNCIONANDO':'ERRO',severity:r.ok?'P3':'P1',description:`HTTP ${r.status}`,method:'HEAD same-origin'})}catch{rows.push({category:'Links',title:path,status:'ERRO',severity:'P1',description:'Falha de rede',method:'HEAD same-origin'})}}return rows}
