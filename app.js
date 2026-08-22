@@ -12,7 +12,7 @@ let vehicles = [
   {id:'demo-006',brand:'Chevrolet',model:'Tracker',version:'Premier',year:2024,mileage:18000,transmission:'Automático',fuel:'Flex',color:'Preto',category:'SUV',price:null,installment:null,featured:false,image:'https://raw.githubusercontent.com/Sato190/loja-do-preto/main/assets/hero-showroom.jpg',whatsappNumber:'',whatsappMessage:'',features:[]}
 ];
 
-const money = n => n ? Number(n).toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}) : 'Consulte o valor';
+const money = n => window.LDP_CURRENCY.format(n,'Consulte o valor');
 const messageFor = v => v.whatsappMessage || `Olá! Tenho interesse no ${v.brand} ${v.model} ${v.version} ${v.year} anunciado no site da Loja do Preto. Gostaria de receber mais informações e conhecer as condições de negociação.`;
 function waLink(message, number=store.whatsapp){ const clean=(number||'').replace(/\D/g,''); return clean ? `https://wa.me/${clean}?text=${encodeURIComponent(message)}` : `https://wa.me/?text=${encodeURIComponent(message+'\n\n[WhatsApp da loja ainda será configurado no site.]')}`; }
 function bindWhatsApp(root=document){ root.querySelectorAll('[data-wa]').forEach(a=>{a.href=waLink(a.dataset.message||'Olá! Gostaria de falar com a Loja do Preto.');a.target='_blank';a.rel='noopener';if(!a.querySelector('.wa-icon')){a.innerHTML=a.innerHTML.replace(/^\s*◉\s*/,'');a.insertAdjacentHTML('afterbegin',whatsappIcon)}}); }

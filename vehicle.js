@@ -1,7 +1,7 @@
 if(!document.querySelector('link[href$="motion.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/motion.css';document.head.append(l)}if(!document.querySelector('script[src$="navigation.js"]')){const s=document.createElement('script');s.src='/navigation.js';document.head.append(s)}if(!document.querySelector('script[src$="motion.js"]')){const s=document.createElement('script');s.src='/motion.js';document.head.append(s)}
 const client = window.supabaseClient;
 const requested = new URLSearchParams(location.search).get('slug') || location.pathname.split('/').filter(Boolean).pop();
-const money = n => n ? Number(n).toLocaleString('pt-BR', {style:'currency',currency:'BRL',maximumFractionDigits:0}) : 'Consulte o valor';
+const money = n => window.LDP_CURRENCY.format(n,'Consulte o valor');
 const esc = value => String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 const wa = (message, number='') => `https://wa.me/${String(number).replace(/\D/g,'')}?text=${encodeURIComponent(message)}`;
 let images = [], imageIndex = 0, vehicle, settings = {};

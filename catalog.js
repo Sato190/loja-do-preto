@@ -1,7 +1,7 @@
 (()=>{
   const db=window.supabaseClient,grid=document.querySelector('#vehicle-grid'),mode=document.body.dataset.catalog||'stock';
   const params=new URLSearchParams(location.search);const state={page:Math.max(0,(Number(params.get('page'))||1)-1),size:12,total:0,rows:[],filters:{},category:params.get('categoria')||'all',type:params.get('tipo')||'all'};
-  const money=n=>n==null?'Consulte':new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}).format(n);
+  const money=n=>window.LDP_CURRENCY.format(n,'Consulte');
   const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const favs=()=>JSON.parse(localStorage.getItem('ldp-favorites')||'[]');
   let compare=[];

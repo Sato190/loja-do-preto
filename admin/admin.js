@@ -1,6 +1,6 @@
 document.head.insertAdjacentHTML('beforeend','<link rel="stylesheet" href="/admin/admin-mobile.css">');
 const client=window.supabaseClient;let allVehicles=[],currentUser=null,accessPoll=null;const OWNER_EMAIL='andrenevessato04@gmail.com';
-const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);const money=n=>n?Number(n).toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}):'Não informado';
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);const money=n=>window.LDP_CURRENCY.format(n,'Não informado');
 function status(msg,error=false,root=document){const el=root.querySelector('.status');if(el){el.textContent=msg;el.style.color=error?'#e66':'#24bd69'}}
 async function init(){if(!client){status('Supabase ainda não foi configurado.',true);return}const{data:{session}}=await client.auth.getSession();session?authorize(session.user):showAuth();client.auth.onAuthStateChange((event,s)=>{if(event==='INITIAL_SESSION')return;setTimeout(()=>s?authorize(s.user):showAuth(),0)})}
 function stopAccessPoll(){if(accessPoll){clearInterval(accessPoll);accessPoll=null}}
