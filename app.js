@@ -1,6 +1,5 @@
 if(!document.querySelector('link[href$="portal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/portal.css';document.head.append(l)}if(!document.querySelector('link[href$="motion.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/motion.css';document.head.append(l)}if(!document.querySelector('script[src$="navigation.js"]')){const s=document.createElement('script');s.src='/navigation.js';document.head.append(s)}if(!document.querySelector('script[src$="motion.js"]')){const s=document.createElement('script');s.src='/motion.js';document.head.append(s)}
-const STORE_WHATSAPP_NUMBER = '';
-const store = { name: 'Loja do Preto', whatsapp: STORE_WHATSAPP_NUMBER };
+const store = { name: 'Loja do Preto', whatsapp: window.LDP_WHATSAPP.official };
 const whatsappIcon='<span class="wa-icon" aria-hidden="true"></span>';
 
 let vehicles = [
@@ -14,7 +13,7 @@ let vehicles = [
 
 const money = n => window.LDP_CURRENCY.format(n,'Consulte o valor');
 const messageFor = v => v.whatsappMessage || `Olá! Tenho interesse no ${v.brand} ${v.model} ${v.version} ${v.year} anunciado no site da Loja do Preto. Gostaria de receber mais informações e conhecer as condições de negociação.`;
-function waLink(message, number=store.whatsapp){ const clean=(number||'').replace(/\D/g,''); return clean ? `https://wa.me/${clean}?text=${encodeURIComponent(message)}` : `https://wa.me/?text=${encodeURIComponent(message+'\n\n[WhatsApp da loja ainda será configurado no site.]')}`; }
+function waLink(message, value=store.whatsapp){return window.LDP_WHATSAPP.url(value)}
 function bindWhatsApp(root=document){ root.querySelectorAll('[data-wa]').forEach(a=>{a.href=waLink(a.dataset.message||'Olá! Gostaria de falar com a Loja do Preto.');a.target='_blank';a.rel='noopener';if(!a.querySelector('.wa-icon')){a.innerHTML=a.innerHTML.replace(/^\s*◉\s*/,'');a.insertAdjacentHTML('afterbegin',whatsappIcon)}}); }
 
 function esc(value){return String(value??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
