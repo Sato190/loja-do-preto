@@ -3,10 +3,10 @@ const client = window.supabaseClient;
 const requested = new URLSearchParams(location.search).get('slug') || location.pathname.split('/').filter(Boolean).pop();
 const money = n => window.LDP_CURRENCY.format(n,'Consulte o valor');
 const esc = value => String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-const wa = (message, value='') => window.LDP_WHATSAPP.url(value||settings.whatsapp);
+const wa = (message, value='') => {const entries=Array.isArray(settings.testimonials)?settings.testimonials:[],configuredNumber=entries.find(item=>item?.type==='whatsapp_number')?.value;return window.LDP_WHATSAPP.url(configuredNumber||value||settings.whatsapp,message)};
 let images = [], imageIndex = 0, vehicle, settings = {};
 function showImage(next) { imageIndex=(next+images.length)%images.length; document.querySelector('#main-vehicle-image').src=images[imageIndex]; document.querySelector('#gallery-index').textContent=`${imageIndex+1}/${images.length}`; document.querySelectorAll('.vehicle-thumbs button').forEach((b,i)=>b.classList.toggle('active',i===imageIndex)); }
-function contactMessage(context='mais informações') { return `Olá! Estou vendo o ${vehicle.brand} ${vehicle.model} ${vehicle.version||''} ${vehicle.year} no site da Loja do Preto e gostaria de consultar ${context}.`; }
+function contactMessage(context='mais informações') { const entries=Array.isArray(settings.testimonials)?settings.testimonials:[],template=entries.find(item=>item?.type==='whatsapp_vehicle_template')?.value;return window.LDP_WHATSAPP.vehicleMessage({...vehicle,link:location.href},template).replace('Gostaria de mais informações.',`Gostaria de consultar ${context}.`); }
 function setLinks() { document.querySelectorAll('[data-context]').forEach(a=>{a.href=wa(contactMessage(a.dataset.context),settings.whatsapp);a.target='_blank';a.rel='noopener'});const header=document.querySelector('#header-contact');if(header){header.href=wa(contactMessage(),settings.whatsapp);header.target='_blank';header.rel='noopener'} }
 function render() {
   images=[...new Set([vehicle.image_url,...(vehicle.image_urls||[])].filter(Boolean))]; if(!images.length)images=['/assets/hero-showroom.png'];

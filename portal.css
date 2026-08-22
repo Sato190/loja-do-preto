@@ -17,4 +17,5 @@ body{min-width:0}.portal-container{max-width:1180px}.portal-btn,.portal-form inp
 .portal-footer img{height:auto;object-fit:contain;filter:none}
 @media(max-width:900px){.feature-layout{grid-template-columns:1fr;min-height:0;gap:34px}.brand-shield.history-media,.brand-shield.history-media img{min-height:0}.brand-shield.history-media img{aspect-ratio:16/10}.feature-layout>div:last-child{padding-block:10px 0}}
 @media(max-width:520px){.brand-shield.history-media img{aspect-ratio:4/3;object-position:center}.feature-layout{gap:28px}.portal-footer img{width:124px}}
+.catalog-whatsapp{display:flex;width:100%;margin-top:12px;text-align:center}
 

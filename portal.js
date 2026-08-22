@@ -11,7 +11,7 @@
   const favorites=()=>JSON.parse(localStorage.getItem('ldp-favorites')||'[]');
   const updateFav=()=>document.querySelectorAll('[data-favorite-count]').forEach(x=>x.textContent=favorites().length);
   updateFav(); addEventListener('storage',updateFav);
-  const wa=(value,message)=>window.LDP_WHATSAPP.url(value);
+  const wa=(value,message)=>window.LDP_WHATSAPP.url(value,message);
   async function loadSettings(){
     if(db){const {data}=await db.from('store_settings').select('*').limit(1).maybeSingle();settings=data||{}}
     document.querySelectorAll('[data-wa]').forEach(a=>{a.href=wa(settings.whatsapp,a.dataset.message||'Olá! Gostaria de falar com a Loja do Preto.');a.target='_blank';a.rel='noopener'});

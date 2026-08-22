@@ -12,8 +12,8 @@ let vehicles = [
 ];
 
 const money = n => window.LDP_CURRENCY.format(n,'Consulte o valor');
-const messageFor = v => v.whatsappMessage || `Olá! Tenho interesse no ${v.brand} ${v.model} ${v.version} ${v.year} anunciado no site da Loja do Preto. Gostaria de receber mais informações e conhecer as condições de negociação.`;
-function waLink(message, value=store.whatsapp){return window.LDP_WHATSAPP.url(value)}
+const messageFor = v => v.whatsappMessage || window.LDP_WHATSAPP.vehicleMessage(v,window.LDP_WHATSAPP_SETTINGS?.vehicleTemplate);
+function waLink(message, value=store.whatsapp){return window.LDP_WHATSAPP.url(value,message)}
 function bindWhatsApp(root=document){ root.querySelectorAll('[data-wa]').forEach(a=>{a.href=waLink(a.dataset.message||'Olá! Gostaria de falar com a Loja do Preto.');a.target='_blank';a.rel='noopener';if(!a.querySelector('.wa-icon')){a.innerHTML=a.innerHTML.replace(/^\s*◉\s*/,'');a.insertAdjacentHTML('afterbegin',whatsappIcon)}}); }
 
 function esc(value){return String(value??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
@@ -45,6 +45,8 @@ async function loadRemoteContent(){
     if(vehicleError||settingsError) throw vehicleError||settingsError;
     if(settings){
       if(settings.whatsapp) store.whatsapp=settings.whatsapp;
+      const whatsappEntries=Array.isArray(settings.testimonials)?settings.testimonials:[];
+      window.LDP_WHATSAPP_SETTINGS={defaultMessage:whatsappEntries.find(item=>item?.type==='whatsapp_default_template')?.value||window.LDP_WHATSAPP.defaultMessage,vehicleTemplate:whatsappEntries.find(item=>item?.type==='whatsapp_vehicle_template')?.value||window.LDP_WHATSAPP.vehicleTemplate};
       const setText=(id,label,value,fallback)=>{const el=document.querySelector(id);if(el)el.textContent=value?`${label}: ${value}`:fallback};
       const name=document.querySelector('#footer-store-name');if(name&&settings.store_name)name.childNodes[0].nodeValue=settings.store_name.toUpperCase();
       setText('#footer-whatsapp','WhatsApp',settings.whatsapp,'WhatsApp: consulte nossa equipe');
