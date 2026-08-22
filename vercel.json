@@ -12,6 +12,7 @@
   ]}],
   "rewrites":[
     {"source":"/admin/conexoes","destination":"/admin"},
+    {"source":"/admin/seguranca","destination":"/admin"},
     {"source":"/estoque/:slug","destination":"/vehicle?slug=:slug"},
     {"source":"/estoque","destination":"/estoque.html"},
     {"source":"/destaques","destination":"/destaques.html"},
