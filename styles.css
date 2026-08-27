@@ -110,5 +110,6 @@ body{min-width:0}.container{max-width:1180px}.btn,.details-btn,.filter-grid inpu
 
 /* Local brand assets: resilient in production and preview environments. */
 .hero-bg{background-image:url('/assets/hero-showroom.png')}
+html,body{max-width:100%;overflow-x:clip}
 .final-cta{background-image:linear-gradient(rgba(4,5,7,.77),rgba(4,5,7,.9)),url('/assets/hero-showroom.png')}
 
