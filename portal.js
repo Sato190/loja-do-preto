@@ -33,7 +33,7 @@
     const gallery=document.querySelector('[data-gallery]');if(gallery){const imgs=Array.isArray(settings.history_gallery)?settings.history_gallery.filter(Boolean):[];gallery.innerHTML=imgs.length?imgs.map((src,i)=>`<img loading="lazy" src="${safe(src)}" alt="Loja do Preto ${i+1}">`).join(''):'<div class="gallery-placeholder">Galeria editável pelo painel</div>'}
   }
   function renderContact(){
-    const box=document.querySelector('[data-contact-list]'); if(box)box.innerHTML=`<a href="tel:${safe(settings.phone)}"><small>Telefone</small><strong>${safe(settings.phone||'Consulte nossa equipe')}</strong></a><a href="mailto:${safe(settings.email)}"><small>E-mail</small><strong>${safe(settings.email||'Consulte nossa equipe')}</strong></a><div><small>Endereço</small><strong>${safe(settings.address||'Consulte nossa equipe')}</strong></div><div><small>Atendimento</small><strong>${safe(settings.business_hours||'Consulte nossa equipe')}</strong></div>`;
+    const box=document.querySelector('[data-contact-list]'); if(box)box.innerHTML=`<div><small>Telefone</small><strong>${safe(settings.phone||'Consulte nossa equipe')}</strong></div><div><small>E-mail</small><strong>${safe(settings.email||'Consulte nossa equipe')}</strong></div><div><small>Atendimento</small><strong>WhatsApp</strong><span>${safe(settings.business_hours||'Fale conosco pelo WhatsApp')}</span></div>`;
   }
   const dialog=document.querySelector('#global-search');
   document.querySelectorAll('#global-search-button,[data-open-search]').forEach(b=>b.addEventListener('click',()=>dialog?.showModal()));

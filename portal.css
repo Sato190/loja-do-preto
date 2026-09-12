@@ -19,3 +19,7 @@ body{min-width:0}.portal-container{max-width:1180px}.portal-btn,.portal-form inp
 @media(max-width:520px){.brand-shield.history-media img{aspect-ratio:4/3;object-position:center}.feature-layout{gap:28px}.portal-footer img{width:124px}}
 .catalog-whatsapp{display:flex;width:100%;margin-top:12px;text-align:center}
 
+/* Accessible contact page */
+.contact-section{background:#0d1015;color:#fff}.contact-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.9fr);gap:clamp(36px,7vw,90px);align-items:start}.contact-intro>p:not(.eyebrow){max-width:560px;color:#c7cbd1;font-size:17px}.contact-section .eyebrow{color:#7ee4a8}.contact-section h2{color:#fff}.contact-list{border-top:1px solid #3b4149}.contact-list>div{display:grid;gap:5px;padding:22px 0;border-bottom:1px solid #3b4149}.contact-list small{color:#9ba3ad;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.contact-list strong{color:#fff;font:700 18px var(--display)}.contact-list span{color:#c7cbd1;font-size:14px}.contact-whatsapp{grid-column:2;width:100%;min-height:54px;font-size:15px}.contact-whatsapp:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media(max-width:720px){.contact-panel{grid-template-columns:1fr;gap:28px}.contact-whatsapp{grid-column:auto}.contact-list>div{padding:18px 0}.contact-intro>p:not(.eyebrow){font-size:15px}}
+
