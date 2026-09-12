@@ -7,8 +7,8 @@
   function applyGeneral(root=document){root.querySelectorAll?.('[data-wa]').forEach(link=>{const message=link.dataset.message||templates().defaultMessage;link.href=window.LDP_WHATSAPP.url(destination,message);link.target='_blank';link.rel='noopener noreferrer'})}
   function applyCatalog(root=document){root.querySelectorAll?.('.catalog-card').forEach(card=>{
     if(card.querySelector('[data-catalog-wa]'))return;
-    const detail=card.querySelector('.card-price a'),title=card.querySelector('h3')?.textContent.trim()||'',version=card.querySelector('.card-body>p')?.textContent.trim()||'',year=card.querySelector('.card-specs span')?.textContent.trim()||'',priceText=card.querySelector('.card-price strong')?.textContent.trim()||'',parts=title.split(/\s+/),brand=parts.shift()||'',model=parts.join(' '),link=detail?.href||location.href;
-    const message=window.LDP_WHATSAPP.vehicleMessage({brand,model,version,year,price:number(priceText),link},templates().vehicleTemplate);
+    const detail=card.querySelector('.card-price a'),title=card.querySelector('h3')?.textContent.trim()||'',version=card.querySelector('.card-body>p')?.textContent.trim()||'',year=card.querySelector('.card-specs span')?.textContent.trim()||'',priceText=card.querySelector('.card-price strong')?.textContent.trim()||'',reference=card.dataset.reference||'',parts=title.split(/\s+/),brand=parts.shift()||'',model=parts.join(' '),link=detail?.href||location.href;
+    const message=window.LDP_WHATSAPP.vehicleMessage({brand,model,version,year,reference,price:number(priceText),link},templates().vehicleTemplate);
     const action=document.createElement('a');action.className='portal-btn green catalog-whatsapp';action.dataset.catalogWa='';action.textContent='Chamar no WhatsApp';action.href=window.LDP_WHATSAPP.url(destination,message);action.target='_blank';action.rel='noopener noreferrer';
     card.querySelector('.card-body')?.append(action);
   })}
